@@ -19,16 +19,20 @@ function task1(){
         inputs[1] = prompt('Input 2-nd number');
 
         for (let i = 0; i < inputsCount; i++){
-            if (inputs[i].toLowerCase() == 'q'){
+            if (inputs[i].toLowerCase() === 'q'){
                 alert(`Position ${i + 1} input perform end condition `);
                 return;
             }
+
+            inputs[i] = +inputs[i];
+
             if (isNaN(inputs[i])){
                 alert(`Position ${i + 1} input not a number `);
                 is_number = false;
             }
         }
         if (!is_number) continue;
+
 
         if (inputs[0] > inputs[1]) alert('1-st > 2-nd');
         else if (inputs[0] < inputs[1]) alert('1-st < 2-nd');
@@ -39,21 +43,22 @@ function task1(){
 }
 
 function task2(){
-    const houseProperties = {
+    const outputId = "entranceNum";
+
+    let houseProperties = {
         floorAmount: document.getElementById("floorAmount").value,
         entranceAmount: document.getElementById("entranceAmount").value,
         flatsPerFloor: document.getElementById("flatsPerFloor").value
     }
 
-    for (let key in houseProperties){
-        if (!houseProperties.hasOwnProperty(key)){
-            continue;
-        }
-        if(isNaN(houseProperties[key] = +houseProperties[key])){
-            alert(`${key} should be a number`)
-            return;
-        }
+    let keyWithNanValue = findNanInObj(houseProperties);
+    
+    if (keyWithNanValue !== false){
+        outputInTagById(outputId, `${keyWithNanValue} is not a number`);
+        return;
     }
+
+    houseProperties = objectValuesToNum(houseProperties);
 
     const minNaturalInt = 1;
     const maxHouseProperties = {
@@ -64,20 +69,20 @@ function task2(){
 
     for (const key in houseProperties){
         if (houseProperties[key] > maxHouseProperties[key] || houseProperties[key] < minNaturalInt){
-            alert(`${key} should be >= ${minNaturalInt} and <= ${maxHouseProperties[key]}`);
+            outputInTagById(outputId, `${key} should be >= ${minNaturalInt} and <= ${maxHouseProperties[key]}`);
             return;
         }
     }
 
-    let inputFlat = prompt("Input flat number")
+    let inputFlat = document.getElementById("flatNum").value;
     if(isNaN(inputFlat = +inputFlat)){
-        alert("Flat number should be a number");
+        outputInTagById(outputId, "Flat number should be a number");
         return;
     }
 
     const maxFlat = houseProperties.floorAmount * houseProperties.flatsPerFloor * houseProperties.entranceAmount;
     if(inputFlat > maxFlat || inputFlat < minNaturalInt){
-        alert(`Max flat num = ${maxFlat}, min = ${minNaturalInt}`)
+        outputInTagById(outputId, `Max flat num = ${maxFlat}, min = ${minNaturalInt}`)
         return
     }
 
@@ -85,32 +90,35 @@ function task2(){
         (houseProperties.floorAmount * houseProperties.flatsPerFloor))
         + 1;
 
-    alert(`Flat ${inputFlat} is located in the entrance number ${entrance}`)
+    outputInTagById(outputId, `Flat ${inputFlat} is located in the entrance number ${entrance}`)
 }
 
 function task3(){
+    const outputTagId = "weekday";
     const year = 2022;
     const minNaturalInt = 1;
-    let month = prompt("Input month");
-    let day = prompt("Input day");
+    let month = document.getElementById("month").value;
+    let day = document.getElementById("day").value;
 
-    if (isNaN(month = +month) || isNaN(day = +day)){
-        alert("Month and day should be a number");
+    month = +month;
+    day = +day;
+    if (isNaN(month) || isNaN(day)){
+        outputInTagById(outputTagId, "Month and day should be a number");
         return;
     }
 
     if (month > 12 || month < minNaturalInt){
-        alert("Incorrect month");
+        outputInTagById(outputTagId, "Incorrect month");
         return;
     }
 
     if (day > 31 || day < minNaturalInt){
-        alert("Incorrect day");
+        outputInTagById(outputTagId, "Incorrect day");
         return;
     }
 
     const weekday = weekdayInRussianTranslate(year, month - 1, day)
-    alert(`${weekday}`)
+    outputInTagById(outputTagId, `${weekday}`);
 
 }
 
@@ -119,4 +127,30 @@ function weekdayInRussianTranslate(year, month, day){
     return WEEKDAYS[weekdayNum]
 }
 
+function findNanInObj(prop){  //возвращает ключ NaN значения, либо false - если такого нет
+    for (let key in prop){
+        
+        if(!prop.hasOwnProperty(key)){
+            continue;
+        }
+        if(isNaN(prop[key])){
+            return key
+        }
+        
+    }
+    return false
+}
+
+function objectValuesToNum(prop){
+    const newObject = {}
+
+    for (let key in prop){
+        newObject[key] = +prop[key]
+    }
+    return newObject;
+}
+
+function outputInTagById(tagId, msg){
+    document.getElementById(tagId).innerHTML = msg;
+}
 

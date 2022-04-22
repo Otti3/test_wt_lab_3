@@ -19,7 +19,7 @@
             <div class="aside__content">
                 <h1><a href="#task1">Task 1</a></h1>
                 <h1><a href="#task2">Task 2</a></h1>
-                <h1 >Task 3</h1>
+                <h1><a href="#task3">Task 3</a></h1>
                 <h1 >Task 4</h1>
                 <h1 >Task 5</h1>
                 <h1 >Task 6</h1>
@@ -64,63 +64,32 @@
                         с выводом информации об ошибке на экран.
                 </div>
 
-                <p><input type="number" id = "floorAmount" placeholder="Input floor amount"></p>
-                <p><input type="number" id = "entranceAmount" placeholder="Input entrance amount"></p>
-                <p><input type="number" id = "flatsPerFloor" placeholder="Input amount of flats per floor"></p>
-                <p><input type="number" id = "flatNum" placeholder="Input flat number"></p>
-                <div class="task__output"></div>
+                <p><input type="number" min = "1" max = "20" id = "floorAmount" placeholder="Input floor amount"></p>
+                <p><input type="number" min = "1" max = "15" id = "entranceAmount" placeholder="Input entrance amount"></p>
+                <p><input type="number" min = "1" max = "5" id = "flatsPerFloor" placeholder="Input amount of flats per floor"></p>
+                <p><input type="number" min = "1" id = "flatNum" placeholder="Input flat number"></p>
+                <div class="task__output" id = "entranceNum">
+                    Task output will be there
+                </div>
                 <input type="button" onclick="task2()" value="Check">
             </div>
-            <div class="main__task">
+            <div class="main__task" id = "task3">
+                <div class="task__title">
+                    Task 3
+                </div>
+                <div class="task__condition">
+                    22 марта 2022 был вторник. Написать скрипт который будет спрашивать у пользователя
+                    номер месяца в интервале “1..12”, а так же число в этом месяце “1..31”.
+                    Результатом работы скрипта является вывод на экран названия дня недели
+                    (например, « среда ») для введённого пользователем числа и месяца.
+                </div>
+                <p><input type="number" min = "1" max = "12" id = "month" placeholder="Input month"></p>
+                <p><input type="number" min = "1" max = "31" id = "day" placeholder="Input day"></p>
+                <div class="task__output" id = "weekday">
+                    Task output will be there
+                </div>
                 <input type="button" onclick="task3()" value="Check">
             </div>
-            <h1>afa</h1>
-            <h1>afa</h1>
-            <h1>afa</h1>
-            <h1>afa</h1>
-            <h1>afa</h1>
-            <h1>afa</h1>
-            <h1>afa</h1>
-            <h1>afa</h1>
-            <h1>afa</h1>
-            <h1>afa</h1>
-            <h1>afa</h1>
-            <h1>afa</h1>
-            <h1>afa</h1>
-            <h1>afa</h1>
-            <h1>afa</h1>
-            <h1>afa</h1>
-            <h1>afa</h1>
-            <h1>afa</h1>
-            <h1>afa</h1>
-            <h1>afa</h1>
-            <h1>afa</h1>
-            <h1>afa</h1>
-            <h1>afa</h1>
-            <h1>afa</h1>
-            <h1>afa</h1>
-            <h1>afa</h1>
-            <h1>afa</h1>
-            <h1>afa</h1>
-            <h1>afa</h1>
-            <h1>afa</h1>
-            <h1>afa</h1>
-            <h1>afa</h1>
-            <h1>afa</h1>
-            <h1>afa</h1>
-            <h1>afa</h1>
-            <h1>afa</h1>
-            <h1>afa</h1>
-            <h1>afa</h1>
-            <h1>afa</h1>
-            <h1>afa</h1>
-            <h1>afa</h1>
-            <h1>afa</h1>
-            <h1>afa</h1>
-            <h1>afa</h1>
-            <h1>afa</h1>
-            <h1>afa</h1>
-            <h1>afa</h1>
         </div>
     </div>
 </div>

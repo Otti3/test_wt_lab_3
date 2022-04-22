@@ -75,7 +75,7 @@ input[type = "button"]{
     display: inline-block;
     box-sizing: border-box;
     padding: 0 25px;
-    margin: 0 15px 15px 0;
+    margin: 15px 15px 15px 0;
     outline: none;
     border: 1px solid #fff;
     border-radius: 50px;
