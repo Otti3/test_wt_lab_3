@@ -8,6 +8,8 @@ const WEEKDAYS = {
     6: "Суббота"
 };
 
+const MIN_NATURAL_INT = 1;
+
 
 function task1(){
     let inputs = [];
@@ -24,12 +26,12 @@ function task1(){
                 return;
             }
 
-            inputs[i] = +inputs[i];
-
-            if (isNaN(inputs[i])){
+            if (!isNumber(inputs[i])){
                 alert(`Position ${i + 1} input not a number `);
                 is_number = false;
             }
+
+            inputs[i] = +inputs[i];
         }
         if (!is_number) continue;
 
@@ -51,16 +53,14 @@ function task2(){
         flatsPerFloor: document.getElementById("flatsPerFloor").value
     }
 
-    let keyWithNanValue = findNanInObj(houseProperties);
-    
-    if (keyWithNanValue !== false){
-        outputInTagById(outputId, `${keyWithNanValue} is not a number`);
-        return;
+    for (let key in houseProperties){
+        if (!isNumber(houseProperties[key])){
+            outputNanInTagById(outputId, key);
+            return;
+        }
+        houseProperties[key] = +houseProperties[key];
     }
 
-    houseProperties = objectValuesToNum(houseProperties);
-
-    const minNaturalInt = 1;
     const maxHouseProperties = {
         floorAmount: 20,
         entranceAmount: 15,
@@ -68,21 +68,22 @@ function task2(){
     }
 
     for (const key in houseProperties){
-        if (houseProperties[key] > maxHouseProperties[key] || houseProperties[key] < minNaturalInt){
-            outputInTagById(outputId, `${key} should be >= ${minNaturalInt} and <= ${maxHouseProperties[key]}`);
+        if (houseProperties[key] > maxHouseProperties[key] || houseProperties[key] < MIN_NATURAL_INT){
+            outputInTagById(outputId, `${key} should be >= ${MIN_NATURAL_INT} and <= ${maxHouseProperties[key]}`);
             return;
         }
     }
 
     let inputFlat = document.getElementById("flatNum").value;
-    if(isNaN(inputFlat = +inputFlat)){
-        outputInTagById(outputId, "Flat number should be a number");
+    if(!isNumber(inputFlat)){
+        outputNanInTagById(outputId, "Flat number");
         return;
     }
+    inputFlat = +inputFlat;
 
     const maxFlat = houseProperties.floorAmount * houseProperties.flatsPerFloor * houseProperties.entranceAmount;
-    if(inputFlat > maxFlat || inputFlat < minNaturalInt){
-        outputInTagById(outputId, `Max flat num = ${maxFlat}, min = ${minNaturalInt}`)
+    if(inputFlat > maxFlat || inputFlat < MIN_NATURAL_INT){
+        outputInTagById(outputId, `Max flat num = ${maxFlat}, min = ${MIN_NATURAL_INT}`)
         return
     }
 
@@ -96,23 +97,23 @@ function task2(){
 function task3(){
     const outputTagId = "weekday";
     const year = 2022;
-    const minNaturalInt = 1;
     let month = document.getElementById("month").value;
     let day = document.getElementById("day").value;
 
-    month = +month;
-    day = +day;
-    if (isNaN(month) || isNaN(day)){
-        outputInTagById(outputTagId, "Month and day should be a number");
+    if (!isNumber(month) || !isNumber(day)){
+        outputNanInTagById(outputTagId, "Month or day");
         return;
     }
 
-    if (month > 12 || month < minNaturalInt){
+    month = +month;
+    day = +day;
+
+    if (month > 12 || month < MIN_NATURAL_INT){
         outputInTagById(outputTagId, "Incorrect month");
         return;
     }
 
-    if (day > 31 || day < minNaturalInt){
+    if (day > 31 || day < MIN_NATURAL_INT){
         outputInTagById(outputTagId, "Incorrect day");
         return;
     }
@@ -127,28 +128,16 @@ function weekdayInRussianTranslate(year, month, day){
     return WEEKDAYS[weekdayNum]
 }
 
-function findNanInObj(prop){  //возвращает ключ NaN значения, либо false - если такого нет
-    for (let key in prop){
-        
-        if(!prop.hasOwnProperty(key)){
-            continue;
-        }
-        if(isNaN(prop[key])){
-            return key
-        }
-        
-    }
-    return false
+
+function isNumber(str){
+    if (typeof str !== "string") return false
+    return !isNaN(str) && !isNaN(parseFloat(str))
 }
 
-function objectValuesToNum(prop){
-    const newObject = {}
-
-    for (let key in prop){
-        newObject[key] = +prop[key]
-    }
-    return newObject;
+function outputNanInTagById(tagId, NanValue){
+    outputInTagById(tagId, `${NanValue} is not a number`);
 }
+
 
 function outputInTagById(tagId, msg){
     document.getElementById(tagId).innerHTML = msg;
