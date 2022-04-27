@@ -46,8 +46,10 @@ function task1(){
 
 function task2(){
     const outputId = "entranceNum";
+    const printMsg = outputInTag(outputId);
+    const printNan = outputNanInTag(outputId);
 
-    let houseProperties = {
+    const houseProperties = {
         floorAmount: document.getElementById("floorAmount").value,
         entranceAmount: document.getElementById("entranceAmount").value,
         flatsPerFloor: document.getElementById("flatsPerFloor").value
@@ -55,7 +57,7 @@ function task2(){
 
     for (let key in houseProperties){
         if (!isNumber(houseProperties[key])){
-            outputNanInTagById(outputId, key);
+            printNan(key);
             return;
         }
         houseProperties[key] = +houseProperties[key];
@@ -69,39 +71,41 @@ function task2(){
 
     for (const key in houseProperties){
         if (houseProperties[key] > maxHouseProperties[key] || houseProperties[key] < MIN_NATURAL_INT){
-            outputInTagById(outputId, `${key} should be >= ${MIN_NATURAL_INT} and <= ${maxHouseProperties[key]}`);
+            printMsg(`${key} should be >= ${MIN_NATURAL_INT} and <= ${maxHouseProperties[key]}`);
             return;
         }
     }
 
     let inputFlat = document.getElementById("flatNum").value;
     if(!isNumber(inputFlat)){
-        outputNanInTagById(outputId, "Flat number");
+        printNan("Flat number");
         return;
     }
     inputFlat = +inputFlat;
 
     const maxFlat = houseProperties.floorAmount * houseProperties.flatsPerFloor * houseProperties.entranceAmount;
     if(inputFlat > maxFlat || inputFlat < MIN_NATURAL_INT){
-        outputInTagById(outputId, `Max flat num = ${maxFlat}, min = ${MIN_NATURAL_INT}`)
-        return
+        printMsg(`Max flat num = ${maxFlat}, min = ${MIN_NATURAL_INT}`)
+        return;
     }
 
     const entrance = Math.trunc((inputFlat - 1) /
         (houseProperties.floorAmount * houseProperties.flatsPerFloor))
         + 1;
 
-    outputInTagById(outputId, `Flat ${inputFlat} is located in the entrance number ${entrance}`)
+    printMsg(`Flat ${inputFlat} is located in the entrance number ${entrance}`)
 }
 
 function task3(){
     const outputTagId = "weekday";
+    const printMsg = outputInTag(outputTagId);
+    const printNan = outputNanInTag(outputTagId);
     const year = 2022;
     let month = document.getElementById("month").value;
     let day = document.getElementById("day").value;
 
     if (!isNumber(month) || !isNumber(day)){
-        outputNanInTagById(outputTagId, "Month or day");
+        printNan("Month or day");
         return;
     }
 
@@ -109,19 +113,239 @@ function task3(){
     day = +day;
 
     if (month > 12 || month < MIN_NATURAL_INT){
-        outputInTagById(outputTagId, "Incorrect month");
+        printMsg("Incorrect month");
         return;
     }
 
     if (day > 31 || day < MIN_NATURAL_INT){
-        outputInTagById(outputTagId, "Incorrect day");
+        printMsg("Incorrect day");
         return;
     }
 
     const weekday = weekdayInRussianTranslate(year, month - 1, day)
-    outputInTagById(outputTagId, `${weekday}`);
+    printMsg(`${weekday}`);
 
 }
+
+function task4(){
+    const outputTagId = "task4__output";
+    const printMsg = outputInTag(outputTagId);
+    const printNan = outputNanInTag(outputTagId);
+    let firstNum = document.getElementById("task4__input1").value;
+    let secondNum = document.getElementById("task4__input2").value;
+
+    if (!isNumber(firstNum)) {
+        printNan(firstNum);
+        return;
+    }
+    firstNum = +firstNum;
+
+    if(!Number.isInteger(firstNum)){
+        printMsg(`${firstNum} is not an integer`)
+        return;
+    }
+
+    if (!isNumber(secondNum)){
+        printNan(secondNum);
+        return;
+    }
+    secondNum = +secondNum;
+
+    if(!Number.isInteger(secondNum)){
+        printMsg(`${secondNum} is not an integer`)
+        return;
+    }
+
+    if (firstNum % 2 === 0 && secondNum % 2 === 0 ){
+        printMsg(`Result: a * b = ${firstNum * secondNum}`);
+    }
+
+    else if (firstNum % 2 === 1 && secondNum % 2 === 1){
+        printMsg(`Result: a + b = ${firstNum + secondNum}`);
+    }
+
+    else {
+        printMsg(`Result: b = ${secondNum}`);
+    }
+
+}
+
+function task5(){
+    function sum(a) {
+        function f(b){
+            return sum(a + b);
+        }
+
+        f.toString = function(){
+            return a;
+        }
+        return f;
+    }
+
+    alert(`sum(3)(1)(1)(12521) = ${sum(3)(1)(1)(12521)}`);
+    alert(`sum(3) = ${sum(3)}`);
+    alert(`sum(11)(-8)(0) = ${sum(11)(-8)(0)}`);
+}
+
+function task6(){
+    const outputTagId = "task6__output";
+    const printMsg = outputInTag(outputTagId);
+    const printNan = outputNanInTag(outputTagId);
+
+    let start = document.getElementById("task6__input1").value;
+    let end = document.getElementById("task6__input2").value;
+    let step = document.getElementById("task6__input3").value;
+
+    let requiredParameters = [start, end];
+    let rangeResult;
+    for (let index in requiredParameters){
+        if (!isNumber(requiredParameters[index])){
+            printNan(requiredParameters[index]);
+            return;
+        }
+        requiredParameters[index] = +requiredParameters[index];
+
+        if(!Number.isInteger(requiredParameters[index])){
+            printMsg(`${requiredParameters[index]} is not an integer`)
+            return;
+        }
+
+    }
+
+    if (step === ""){
+        rangeResult = range(...requiredParameters);
+    }
+    else {
+        step = +step;
+        rangeResult = range(...requiredParameters, step);
+    }
+    printMsg(`range(${start})(${end})(${step}) = ${rangeResult}`);
+}
+
+function task7() {
+    const outputTagId = "task7__output";
+    const printMsg = outputInTag(outputTagId);
+    const printNan = outputNanInTag(outputTagId);
+
+    let rows = document.getElementById("task7__input1").value;
+    let columns = document.getElementById("task7__input2").value;
+
+    let matrixDimension = {
+        rows: rows,
+        columns: columns
+    };
+
+    for (let key in matrixDimension) {
+        if (!isNumber(matrixDimension[key])) {
+            printNan(key);
+            return;
+        }
+        matrixDimension[key] = +matrixDimension[key];
+
+        if (!Number.isInteger(matrixDimension[key]) && matrixDimension[key] > 0) {
+            printMsg(`${key} should be a positive integer`)
+            return;
+        }
+    }
+}
+
+function task8(){
+    const arr1 = [[1,[2,[3,[4]]]], [5,6],[7,8]];
+    let result1 = uniqueArraysElems(...arr1);
+    if (typeof result1 === "number"){
+        alert(`Dimension of ${arr1}  = ${result1}`)
+    } else{
+        alert(`Result array of ${arr1} = ${result1}`)
+    }
+
+    const arr2 = [[1, 5, 5, 3], [10, 5, 1, 10], [5, 1]];
+    let result2 = uniqueArraysElems(...arr2);
+    if (typeof result2 === "number"){
+        alert(`Dimension of ${arr2}  = ${result2}`)
+    } else{
+        alert(`Result array of ${arr2} = ${result2}`)
+    }
+}
+
+function task9(){
+    let arr = [[1,[2,[3,[4]]]], [5,6],[7,8]];
+    let arrToPush = toFlat(arr);
+    alert(`[${arrToPush}]`);
+
+}
+
+function task10(){
+    let test = MyFunctionUnique([1, 2, 1, 5, 1, 5, 1, 4], 3);
+    console.log(test);
+}
+
+function MyFunctionUnique(obj, repeatCount){
+    if (typeof obj[Symbol.iterator] !== "function"){
+        alert(`Not a iterable data type`);
+        return;
+    }
+    const dictLetters = {};
+    for (const item of obj){
+        if (item in dictLetters){
+            dictLetters[item]++;
+        } else{
+            dictLetters[item] = 1;
+        }
+    }
+    const result = [];
+    for (const key in dictLetters){
+        if (dictLetters[key] <= repeatCount){
+            result.push(key);
+        }
+    }
+    return result;
+
+}
+
+function toFlat (arrToCheck, arrToPush){
+    if (arrToPush === undefined){
+        arrToPush = [];
+    }
+
+    for (let item of arrToCheck){
+        if(Array.isArray(item)){
+            toFlat(item, arrToPush);
+        }
+        else{
+            arrToPush.push(item);
+        }
+    }
+    return arrToPush;
+
+}
+
+function uniqueArraysElems(...arrays) {
+
+    for (const arr of arrays){
+        for(const item of arr){
+            if(Array.isArray(arr[item])){
+                return getArrDimension(arrays);
+            }
+        }
+    }
+
+    let arrWithUniqueValues = [];
+
+    for (const arr of arrays){
+        for(const item of arr){
+            if(!arrWithUniqueValues.includes(item)){
+                arrWithUniqueValues.push(item);
+            }
+        }
+    }
+
+    return arrWithUniqueValues;
+}
+
+function getArrDimension(arr) {
+    return Array.isArray(arr) ? 1 + Math.max(0, ...arr.map(getArrDimension)) : 0;
+}
+
 
 function weekdayInRussianTranslate(year, month, day){
     const weekdayNum = new Date(year, month, day).getDay();
@@ -134,12 +358,52 @@ function isNumber(str){
     return !isNaN(str) && !isNaN(parseFloat(str))
 }
 
-function outputNanInTagById(tagId, NanValue){
-    outputInTagById(tagId, `${NanValue} is not a number`);
+
+function outputInTag(tagId){
+    return function(msg){
+        document.getElementById(tagId).innerHTML = msg;
+    }
+}
+
+function outputNanInTag(tagId){
+    return function(NanValue){
+        document.getElementById(tagId).innerHTML = `${NanValue} is not a number`;
+    }
+}
+
+function range(start, end, step = 1){
+    let result = [start];
+    let incRange = end > start;
+
+    if ((incRange === true && step < 0) || (incRange === false && step > 0)){
+        return result;
+    }
+
+    for (let i = start + step; incRange ? i <= end :  i >= end; i+=step){
+        result.push(i);
+    }
+    return result;
+}
+
+function initMatrix(rows, columns){
+    const matrix = [];
+    for (let i = 0; i < rows; i++){
+        matrix[i] = [];
+        for (let j = 0; j < columns; j++){
+            matrix[i][j] = Math.floor(Math.random() * 101);
+        }
+    }
+    return matrix;
+}
+
+function printMatrix(matrix, tagId){
+    const rows = matrix.length;
+    const columns = matrix[0].length;
+
 }
 
 
-function outputInTagById(tagId, msg){
-    document.getElementById(tagId).innerHTML = msg;
-}
+
+
+
 

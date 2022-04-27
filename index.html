@@ -20,13 +20,13 @@
                 <h1><a href="#task1">Task 1</a></h1>
                 <h1><a href="#task2">Task 2</a></h1>
                 <h1><a href="#task3">Task 3</a></h1>
-                <h1 >Task 4</h1>
-                <h1 >Task 5</h1>
-                <h1 >Task 6</h1>
-                <h1 >Task 7</h1>
-                <h1 >Task 8</h1>
-                <h1 >Task 9</h1>
-                <h1 >Task 10</h1>
+                <h1><a href="#task4">Task 4</a></h1>
+                <h1><a href="#task5">Task 5</a></h1>
+                <h1><a href="#task6">Task 6</a></h1>
+                <h1><a href="#task7">Task 7</a></h1>
+                <h1><a href="#task8">Task 8</a></h1>
+                <h1><a href="#task9">Task 9</a></h1>
+                <h1><a href="#task10">Task 10</a></h1>
             </div>
         </aside>
         <div class="page__main">
@@ -90,6 +90,118 @@
                 </div>
                 <input type="button" onclick="task3()" value="Check">
             </div>
+                <div class="main__task" id = "task4">
+                    <div class="task__title">
+                        Task 4
+                    </div>
+                    <div class="task__condition">
+                        Вам необходимо создать функцию, которая будет получать на вход два любых числа.
+                        При условии если оба введённых числа чётные - необходимо венуть их произведение.
+                        При нечётных числах возвращаем сумму. В варианте при котором первое число чётное,
+                        а второе нечётное - возвращаем нечётное число,
+                        в обратном случае возвращаем чётное.
+                    </div>
+                    <p><input type="number"  id = "task4__input1" placeholder="Input first number"></p>
+                    <p><input type="number"  id = "task4__input2" placeholder="Input second number"></p>
+                    <div class="task__output" id = "task4__output">
+                        Task output will be there
+                    </div>
+                    <input type="button" onclick="task4()" value="Check">
+                </div>
+                <div class="main__task" id = "task5">
+                    <div class="task__title">
+                        Task 5
+                    </div>
+                    <div class="task__condition">
+                        Необходимо создать функцию, которая будет возвращать сумму любого введённого количества чисел.
+                        Обратите внимание на то как должна вызываться данная функция:
+                        result = sum(3)(1)(1); // результат 5
+                    </div>
+                    <input type="button" onclick="task5()" value="Check">
+                </div>
+                <div class="main__task" id = "task6">
+                    <div class="task__title">
+                        Task 6
+                    </div>
+                    <div class="task__condition">
+                        Реализуйте функцию range(), которая будет принимать на вход два аргумента:
+                        “старт” и “финиш” диапазона.
+                        Функция возвращать массив, содержащий все числа ввдеённого диапазона,
+                        включая начальное и конечное. При этом необходимо предусмотреть необязательный аргумент –
+                        шаг для построения массива который может быть как положительным так и отрицательным.
+                        Если шаг явно не задан – он равен 1. Результатом работы range(7, 4, -2) будет [7, 5].
+                    </div>
+                    <p><input type="number"  id = "task6__input1" placeholder="Input start"></p>
+                    <p><input type="number"  id = "task6__input2" placeholder="Input end"></p>
+                    <p><input type="number"  id = "task6__input3" placeholder="Input step(optional)"></p>
+                    <div class="task__output" id = "task6__output">
+                        Task output will be there
+                    </div>
+                    <input type="button" onclick="task6()" value="Check">
+                </div>
+                <div class="main__task" id = "task7">
+                    <div class="task__title">
+                        Task 7
+                    </div>
+                    <div class="task__condition">
+                        Необходимо реализовать функцию создания матрицы,
+                        принимающую в качестве аргументов количество строк и количество столбцов.
+                        Эта функция должна отображать на экране матрицу,
+                        заполненную случайными числами в диапазоне от 0 до 100.
+                        Так же необходимо написать другую функцию,
+                        которая будет выполнять суммирование двух различных по значению “первых матриц”.
+                    </div>
+                    <p><input type="number"  id = "task7__input1" placeholder="Input rows amount"></p>
+                    <p><input type="number"  id = "task7__input2" placeholder="Input columns amount"></p>
+                    <div class="task__output" id = "task7__output">
+                        <div class="last-matrix"></div>
+                        <div class="first-matrix"></div>
+                        <div class="second-matrix"></div>
+                        <div class="summary-matrix"></div>
+                    </div>
+                    <input type="button" onclick="task7()" value="Check">
+                </div>
+                <div class="main__task" id = "task8">
+                    <div class="task__title">
+                        Task 8
+                    </div>
+                    <div class="task__condition">
+                        Создайте функцию, которая будет объединять уникальные элементы всех одномерных массивов,
+                        переданных ей в качестве параметра. Если вводимый пользователем массив многомерный,
+                        то необходимо выдать пользователю сообщение о том
+                        что функция работает только с одномерными массива и указать размерность введённого массива.
+                        MyUnionFunc([1, 5, 5, 3], [10, 5, 1, 10], [5, 1]) вернёт[1, 3, 5, 10].
+                    </div>
+                    <div class="task__output" id = "task8__output">
+                    </div>
+                    <input type="button" onclick="task8()" value="Check">
+                </div>
+                <div class="main__task" id = "task9">
+                    <div class="task__title">
+                        Task 9
+                    </div>
+                    <div class="task__condition">
+                        Создайте функцию, которая в качестве агрумента может принимать массив
+                        с уровнями вложенности элементов любой глубины, выполнит приведение его к “плоскому” виду.
+                        Если элементы массива не имеют вложенности, то функция
+                        просто выводит его на экран без изменений.
+                        MyArrayFlattenFunc([1, [2], [[5], [3, [4]]]]) вернёт [1, 2, 3, 4, 5]
+                    </div>
+                    <input type="button" onclick="task9()" value="Check">
+                </div>
+                <div class="main__task" id = "task10">
+                    <div class="task__title">
+                        Task 10
+                    </div>
+                    <div class="task__condition">
+                        Создайте функцию, которая в качестве агрумента может принимать массив
+                        с уровнями вложенности элементов любой глубины, выполнит приведение его к “плоскому” виду.
+                        Если элементы массива не имеют вложенности, то функция
+                        просто выводит его на экран без изменений.
+                        MyArrayFlattenFunc([1, [2], [[5], [3, [4]]]]) вернёт [1, 2, 3, 4, 5]
+                    </div>
+                    <input type="button" onclick="task10()" value="Check">
+                </div>
         </div>
     </div>
 </div>
